@@ -1,2 +1,2 @@
 # raspberry-pi
-Raspberry pi cluster 
+Scripts for rasperry pi cluster. 
