@@ -1,4 +1,5 @@
 #include "fractalheader.h"
 
 struct point;
-int halfWayPoint(point, point);
+point halfWayPoint(point, point);
+double getMyInt(char *);

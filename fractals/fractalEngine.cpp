@@ -4,18 +4,15 @@
 
 using namespace std;
 
-struct point;
-int halfWayPoint(point, point);
-
 int main(int argc, char *argv[]){
   
   point p1, p2, p3, seed;
-  int iterations = argv[8];
+  int iterations = (int)argv[8];
   point plot[iterations];
 
-  p1.x = argv[0]; p1.y = argv[1];
-  p2.x = argv[2]; p2.y = argv[3];
-  p3.x = argv[4]; p3.y = argv[5];
+  p1.x = getMyNum(argv[0]); p1.y = getMyNum(argv[1]);
+  p2.x = getMyNum(argv[2]); p2.y = getMyNum(argv[3]);
+  p3.x = getMyNum(argv[4]); p3.y = getMyNum(argv[5]);
   seed.x = argv[6] ; seed.y = argv[7];
 
   srand(time(NULL));			//Seed random variable.
