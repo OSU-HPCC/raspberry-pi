@@ -38,25 +38,25 @@ double getMyNum(char *input){
       decimalPos = stringCount;
     stringCount++;
   }
-  if(decimal == true){
-    tensOrientation = decimalPos;
-  }
-  else{
-    tensOrientation = stringCount;
-  }
-  if(negative == true){
-    startingChar = 1;
-  }
-  for(int i = startingChar; i <= stringCount; i++){
-    if((input[i]) == '.'){
+    if(decimal == true){
+      tensOrientation = decimalPos;
     }
     else{
-      finalNum += (double) (input[i])*(double)pow(10, (tensOrientation - i));
+      tensOrientation = stringCount;
+    }
+    if(negative == true){
+      startingChar = 1;
+    }
+    for(int i = startingChar; i <= stringCount; i++){
+      if((input[i]) == '.'){
+      }
+      else{
+        finalNum += (double) (input[i])*(double)pow(10, (tensOrientation - i));
+      }
     }
   }
-
-return finalNum;
-  }
+  return finalNum;
+  
 }
 
 #endif
