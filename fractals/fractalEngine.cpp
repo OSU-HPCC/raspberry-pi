@@ -7,13 +7,13 @@ using namespace std;
 int main(int argc, char *argv[]){
   
   point p1, p2, p3, seed;
-  int iterations = (int)argv[8];
+  int iterations = (int)getMyNum(argv[8]);
   point plot[iterations];
 
   p1.x = getMyNum(argv[0]); p1.y = getMyNum(argv[1]);
   p2.x = getMyNum(argv[2]); p2.y = getMyNum(argv[3]);
   p3.x = getMyNum(argv[4]); p3.y = getMyNum(argv[5]);
-  seed.x = argv[6] ; seed.y = argv[7];
+  seed.x = (argv[6]) ; seed.y = getMyNum(argv[7]);
 
   srand(time(NULL));			//Seed random variable.
   int dice;				//Variable for random numbers.

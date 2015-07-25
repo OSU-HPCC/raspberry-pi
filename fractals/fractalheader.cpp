@@ -2,4 +2,4 @@
 
 struct point;
 point halfWayPoint(point, point);
-double getMyInt(char *);
+double getMyInt(char *input[]);

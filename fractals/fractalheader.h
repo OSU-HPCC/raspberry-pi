@@ -19,7 +19,7 @@ point halfWayPoint(point p1, point p2){
 
 }
 
-double getMyNum(char *input){
+double getMyNum(char *input[]){
   
   int stringCount = 0;
   double finalNum = 0;
@@ -27,8 +27,8 @@ double getMyNum(char *input){
   int tensOrientation;
   bool decimal = false;
 
-  while((*input[stringCount]) != "\n"){
-    if((*input[stringCount]) == "."){
+  while((input[stringCount]) != '\n'){
+    if((input[stringCount]) == '.'){
       decimal = true;
       decimalPos = stringCount;
     stringCount++;
@@ -40,16 +40,15 @@ double getMyNum(char *input){
     tensOrientation = stringCount;
   }
   for(int i; i <= stringCount; i++){
-    if((*input[i]) == "."){
+    if((input[i]) == '.'){
     }
     else{
-      finalNum += (double) (*input[i])*(double)pow(10, (tensOrientation - i));
+      finalNum += (double) (input[i])*(double)pow(10, (tensOrientation - i));
     }
   }
 
 return finalNum;
+  }
 }
-
-  
 
 #endif
