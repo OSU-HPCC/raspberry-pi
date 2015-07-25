@@ -19,7 +19,7 @@ point halfWayPoint(point p1, point p2){
 
 }
 
-double getMyNum(char *input[]){
+double getMyNum(char *input){
   
   int stringCount = 0;
   double finalNum = 0;
