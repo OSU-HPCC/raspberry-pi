@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<cstdlib>
+#include<cstring>
 #include "fractalheader.h"
 
 using namespace std;
@@ -10,41 +11,50 @@ int main(int argc, char *argv[]){
   char *firstx, *firsty, *secondx, *secondy, *thirdx, *thirdy, *origx, *origy;
   char *specIter;
 
-  for(int i; i < argc; i++){			//Read in arguments from user.
-    if(argc != 19){			//Check for the right number of arguments.
-      cout << "Incorrect number of arguments.";
-      return 1;
-    }
+  if(argc != 19){			//Check for the right number of arguments.
+    cout << "Incorrect number of arguments.\n";
+    return 1;
+  }
+  for(int i = 1; i < argc; i++){			//Read in arguments from user.
     if(i + 1 != argc){				//Check for remaining arguments.
-      if(argv[i] == "-fx"){			//First x-coordinate.
+      if(std::string(argv[i]) ==  "-fx"){			//First x-coordinate.
         firstx = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-fy"){		//First y-coordinate.
+      else if(std::string(argv[i]) == "-fy"){		//First y-coordinate.
         firsty = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-sx"){		//Second x-coordinate.
+      else if(std::string(argv[i]) == "-sx"){		//Second x-coordinate.
         secondx = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-sy"){		//Second y-coordinate.
+      else if(std::string(argv[i]) == "-sy"){		//Second y-coordinate.
         secondy = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-tx"){		//Third x-coordinate.
+      else if(std::string(argv[i]) == "-tx"){		//Third x-coordinate.
         thirdx = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-ty"){		//Third y-coordinate.
+      else if(std::string(argv[i]) == "-ty"){		//Third y-coordinate.
         thirdy = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-ox"){		//Original x-coordinate.
+      else if(std::string(argv[i]) == "-ox"){		//Original x-coordinate.
         origx = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-oy"){		//Original y-coordinate.
+      else if(std::string(argv[i]) == "-oy"){		//Original y-coordinate.
         origy = argv[i+1];
+        i++;
       }
-      else if(argv[i] == "-i"){			//Number of iterations.
+      else if(std::string(argv[i]) == "-i"){		//Number of iterations.
         specIter = argv[i+1];
+        i++;
       }
       else{
-        cout << "Not enough or invalid arguments.";
+        cout << "Invalid arguments.\n";
         return 1;
       }
     }

@@ -26,7 +26,12 @@ double getMyNum(char *input){
   int decimalPos = 0;
   int tensOrientation;
   bool decimal = false;
+  bool negative = false;
+  int startingChar = 0;
 
+  if(input[0] == '-'){
+    negative = true;
+  }
   while((input[stringCount]) != '\n'){
     if((input[stringCount]) == '.'){
       decimal = true;
@@ -39,7 +44,10 @@ double getMyNum(char *input){
   else{
     tensOrientation = stringCount;
   }
-  for(int i; i <= stringCount; i++){
+  if(negative == true){
+    startingChar = 1;
+  }
+  for(int i = startingChar; i <= stringCount; i++){
     if((input[i]) == '.'){
     }
     else{
