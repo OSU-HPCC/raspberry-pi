@@ -2,13 +2,13 @@
 #define FRACTALSTUFF
 
 struct point{
-  double x = 0;
-  double y = 0;
-}
+  double x;
+  double y;
+};
 
 
 
-int halfWayPoint( point p1, point p2){
+int halfWayPoint(point p1, point p2){
 
   point meetIntheMiddle;
   meetIntheMiddle.x = max(p1.x, p2.x) - abs(p1.x - p2.x)/(2);

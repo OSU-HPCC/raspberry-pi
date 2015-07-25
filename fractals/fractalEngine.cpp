@@ -1,6 +1,6 @@
 #include<iostream>
 #include<fstream>
-#include "fractalEngine.h"
+#include "fractalheader.h"
 
 using namespace std;
 
@@ -9,10 +9,15 @@ int halfWayPoint(point, point);
 
 int main(int argc, char *argv[]){
   
-  point p1 = argv[0], p2 = argv[1], p3 = argv[2], seed = argv[3];
-  int iterations = argv[4];
+  point p1, p2, p3, seed;
+  int iterations = argv[8];
   point plot[iterations];
-  
+
+  p1.x = argv[0]; p1.y = argv[1];
+  p2.x = argv[2]; p2.y = argv[3];
+  p3.x = argv[4]; p3.y = argv[5];
+  seed.x = argv[6] ; seed.y = argv[7];
+
   srand(time(NULL));			//Seed random variable.
   int dice;				//Variable for random numbers.
   point pos = seed;			//First step of iteration.
