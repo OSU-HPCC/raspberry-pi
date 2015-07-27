@@ -32,11 +32,12 @@ double getMyNum(char *input){
   if(input[0] == '-'){
     negative = true;
   }
-  while((input[stringCount]) != '\n'){
+  while((input[stringCount]) != '\0'){
     if((input[stringCount]) == '.'){
       decimal = true;
       decimalPos = stringCount;
-    stringCount++;
+    }
+    stringCount++;    
   }
     if(decimal == true){
       tensOrientation = decimalPos;
@@ -54,7 +55,6 @@ double getMyNum(char *input){
         finalNum += (double) (input[i])*(double)pow(10, (tensOrientation - i));
       }
     }
-  }
   return finalNum;
   
 }
