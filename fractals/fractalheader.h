@@ -51,8 +51,12 @@ double getMyNum(char *input){
     for(int i = startingChar; i <= stringCount; i++){
       if((input[i]) == '.'){
       }
+      else if(negative == false){
+        finalNum += (double) (input[i] - '0')*(double)pow(10, (tensOrientation - i - 1));
+      }
       else{
-        finalNum += (double) (input[i])*(double)pow(10, (tensOrientation - i));
+        finalNum += (double) (input[i] - '0')*(double)pow(10, (tensOrientation - i - 2));
+        finalNum = finalNum * -1;
       }
     }
   return finalNum;
