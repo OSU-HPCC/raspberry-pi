@@ -110,8 +110,8 @@ int main(int argc, char *argv[]){
 
   ofstream plotFile;
   plotFile.open("fractalpoints.txt");
-  for(int j; j < iterations; j++){
-    plotFile << "(" << plot[j].x << ", " << plot[j].y << ")\n";
+  for(int j = 0; j < iterations; j++){
+    plotFile << plot[j].x << " " << plot[j].y << "\n";
   }
   plotFile.close();
 

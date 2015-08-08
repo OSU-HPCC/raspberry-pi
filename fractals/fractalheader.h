@@ -48,7 +48,7 @@ double getMyNum(char *input){
     if(negative == true){
       startingChar = 1;
     }
-    for(int i = startingChar; i <= stringCount; i++){
+    for(int i = startingChar; i < stringCount; i++){
       if((input[i]) == '.'){
       }
       else if(negative == false){

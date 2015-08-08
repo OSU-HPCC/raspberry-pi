@@ -13,6 +13,22 @@ click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
 
+def runEngine(bashCommand):				#Function runs back end and plots results. 
+    os.system(bashCommand)
+    pointFile = open('fractalpoints.txt', 'r')
+    plotme = pointFile.read()				#Read text from file and clean up for next time.
+    pointFile.close()
+    os.system("rm ./fractalpoints.txt")
+    plotme = plotme.split('\n')				#Format data into something nice to work with.
+    plotme = plotme[:-1]
+    for i in range(len(plotme)):
+        plotme[i] = plotme[i].split(' ')
+        plotme[i][0] = float(plotme[i][0])
+        plotme[i][1] = float(plotme[i][1])
+        paper.create_oval(plotme[i][0] - point_size, plotme[i][1] + point_size, plotme[i][0] + point_size, plotme[i][1] - point_size, outline="black", fill="orange", width=2)
+        last_point[0] = plotme[i][0]
+        last_point[1] = plotme[i][1]
+
 def whichPoint(event, triangle_points):			#Function that plots a point when the student picks one of the triangle points.
     global click_counter
 
@@ -32,8 +48,7 @@ def whichPoint(event, triangle_points):			#Function that plots a point when the 
 
     if point1 == True:					#Calculate the next step base on the previous point plotted.
         bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "1"
-        os.system(bashCommand)
-        print bashCommand
+        runEngine(bashCommand)
         click_counter += 1
     elif point2 == True:
         #Make the appropriate call to back end
