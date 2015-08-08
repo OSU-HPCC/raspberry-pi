@@ -1,24 +1,48 @@
 #!/bin/python
 
+import os
+from subprocess import *
 from Tkinter import *
 top = Tk()
 top.title("Fractal Pie")
 
 point_size = 5				#Size of points being plotted.
-canvas_width = 1500			#Width and height for plotting fractals.
-canvas_height = 700			
+canvas_width = 1200			#Width and height for plotting fractals.
+canvas_height = 500			
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
 
 def whichPoint(event, triangle_points):			#Function that plots a point when the student picks one of the triangle points.
+    global click_counter
+
     point1 = False
     point2 = False
     point3 = False
 
-    if (event.x < triangle_points[0] + point_size*2) && (event.x > triangle_points[0] - point_size*2): #Test which point was clicked on
-        if (event.y < triangle_points[1] + point_size*2) && (event.y > triangle_points[1] - point_size*2):
+    if (event.x < triangle_points[0] + point_size*2)  and (event.x > triangle_points[0] - point_size*2): #Test if point1 was clicked on
+        if (event.y < triangle_points[1] + point_size*2) and (event.y > triangle_points[1] - point_size*2):
             point1 = True
+    if (event.x < triangle_points[2] + point_size*2)  and (event.x > triangle_points[2] - point_size*2): #Test if point2 was clicked on
+        if (event.y < triangle_points[3] + point_size*2) and (event.y > triangle_points[3] - point_size*2):
+            point2 = True
+    if (event.x < triangle_points[4] + point_size*2)  and (event.x > triangle_points[4] - point_size*2): #Test if point3 was clicked on
+        if (event.y < triangle_points[5] + point_size*2) and (event.y > triangle_points[5] - point_size*2):
+            point2 = True
+
+    if point1 == True:					#Calculate the next step base on the previous point plotted.
+        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "1"
+        os.system(bashCommand)
+        print bashCommand
+        click_counter += 1
+    elif point2 == True:
+        #Make the appropriate call to back end
+        click_counter += 1
+    elif point3 == True:
+        #Make the appropriate call to back end
+        click_counter += 1
+    else:						#If student clicked too far away from a point, nothing happens.
+        return
 
 demo_step = 0
 #********************************
@@ -44,14 +68,18 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
 
     if demo_step == 0:			#Pick fractal 'seed'
         paper.create_oval(event.x - point_size, event.y + point_size, event.x + point_size, event.y - point_size, outline="black", fill="orange", width=2)
+        last_point[0] = event.x
+        last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
 
     elif demo_step == 1:		#Student picks their own random path.
         if click_counter < 10:
             whichPoint(event, triangle_points)
-            click_counter +=1
             if click_counter == 10:	#Move to next step of demo.
                 demo_step +=1
+
+    elif demo_step == 2:
+        paper.create_oval(10, 10, 50, 50) 
         
 
 paper = Canvas(top, width = canvas_width, height = canvas_height)				#Setup the canvas
