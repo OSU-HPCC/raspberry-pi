@@ -1,5 +1,6 @@
 #!/bin/python
 
+#import pdb				#Debugger for development
 import os
 from subprocess import *
 from Tkinter import *
@@ -7,7 +8,7 @@ top = Tk()
 top.title("Fractal Pie")
 
 point_size = 5				#Size of points being plotted.
-canvas_width = 1200			#Width and height for plotting fractals.
+canvas_width = 500			#Width and height for plotting fractals.
 canvas_height = 500			
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
@@ -44,17 +45,19 @@ def whichPoint(event, triangle_points):			#Function that plots a point when the 
             point2 = True
     if (event.x < triangle_points[4] + point_size*2)  and (event.x > triangle_points[4] - point_size*2): #Test if point3 was clicked on
         if (event.y < triangle_points[5] + point_size*2) and (event.y > triangle_points[5] - point_size*2):
-            point2 = True
+            point3 = True
 
     if point1 == True:					#Calculate the next step base on the previous point plotted.
         bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "1"
         runEngine(bashCommand)
         click_counter += 1
     elif point2 == True:
-        #Make the appropriate call to back end
+        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "2"
+        runEngine(bashCommand)
         click_counter += 1
     elif point3 == True:
-        #Make the appropriate call to back end
+        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "3"
+        runEngine(bashCommand)
         click_counter += 1
     else:						#If student clicked too far away from a point, nothing happens.
         return
