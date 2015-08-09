@@ -26,7 +26,7 @@ canvas_height = 500
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
-auto_num_pts = "10000"			#Number of iteration when computer takes over doing random walk.
+auto_num_pts = "1000"			#Number of iteration when computer takes over doing random walk.
 
 #*******************************
 #Some function definitions
@@ -57,57 +57,6 @@ def plotaPoint(plotme):					#Plots a single point
     last_point[0] = plotme[0]
     last_point[1] = plotme[1]				#Update record of last point plotted.
 
-def whichPoint(event, triangle_points):			#Function that plots a point when the student picks one of the triangle points.
-    global click_counter
-
-    point1 = False
-    point2 = False
-    point3 = False
-
-    if (event.x < triangle_points[0] + point_size*2)  and (event.x > triangle_points[0] - point_size*2): #Test if point1 was clicked on
-        if (event.y < triangle_points[1] + point_size*2) and (event.y > triangle_points[1] - point_size*2):
-            point1 = True
-    if (event.x < triangle_points[2] + point_size*2)  and (event.x > triangle_points[2] - point_size*2): #Test if point2 was clicked on
-        if (event.y < triangle_points[3] + point_size*2) and (event.y > triangle_points[3] - point_size*2):
-            point2 = True
-    if (event.x < triangle_points[4] + point_size*2)  and (event.x > triangle_points[4] - point_size*2): #Test if point3 was clicked on
-        if (event.y < triangle_points[5] + point_size*2) and (event.y > triangle_points[5] - point_size*2):
-            point3 = True
-
-    if point1 == True:					#Calculate the next step base on the previous point plotted.
-        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "1"
-        enginePoint = runEngine(bashCommand)
-        plotaPoint(enginePoint[0])
-        click_counter += 1
-    elif point2 == True:
-        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "2"
-        enginePoint = runEngine(bashCommand)
-        plotaPoint(enginePoint[0])
-        click_counter += 1
-    elif point3 == True:
-        bashCommand = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + "1" + " -p " + "3"
-        enginePoint = runEngine(bashCommand)
-        plotaPoint(enginePoint[0])
-        click_counter += 1
-    else:						#If student clicked too far away from a point, nothing happens.
-        return
-
-#********************************
-# demo_step is special counter that
-# allows the mouse-click event
-# function handler to behave
-# differently depending on the place
-# where the student is in the demo.
-# Counter numbers are associated with
-# the following steps:
-#
-# 0: Student is asked to pick the
-#    initial staring point or 'seed'
-#    for the fractals.
-# 1: Student picks their own random
-#    path by touching points of the 
-#    triangle.
-
 def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global triangle_points
     global click_counter
@@ -119,27 +68,15 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         last_point[0] = event.x
         last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
-
-    elif demo_step == 1:		#Student picks their own random path.
-        if click_counter < 10:
-            whichPoint(event, triangle_points)
-            if click_counter == 10:	#Move to next step of demo.
-                demo_step +=1
-
-    elif demo_step == 2:
-        secondInfo = open('patterns.txt', 'r')			#Second dialog message.
-        secondInfotext = secondInfo.read()
-        secondInfo.close()
-        information(secondInfotext)
         computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0"
         enginePoints = runEngine(computerRun)
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
             plotaPoint(enginePoints[k])
-        thirdInfo = open('results.txt', 'r')
-        thirdInfotext = thirdInfo.read()
-        thirdInfo.close()
-        information(thirdInfotext)
-    elif demo_step > 2:
+        secondInfo = open('supercomputers.txt', 'r')		#Get message about how supercomputers work.
+        secondInfotext = secondInfo.read()
+        secondInfo.close()
+        information(secondInfotext)
+    elif demo_step > 0:
         firstSteps.quit()
 
 
@@ -158,10 +95,10 @@ paper.create_oval(triangle_points[0] - point_size*2, triangle_points[1] + point_
 paper.create_oval(triangle_points[2] - point_size*2, triangle_points[3] + point_size*2, triangle_points[2] + point_size*2, triangle_points[3] - point_size*2, outline="black", fill="black", width=2)
 paper.create_oval(triangle_points[4] - point_size*2, triangle_points[5] + point_size*2, triangle_points[4] + point_size*2, triangle_points[5] - point_size*2, outline="black", fill="black", width=2)
 
-introduction = open('introduction.txt', 'r')			#Get starting info message from file and use it in dialog box.
+introduction = open('lesspoints.txt', 'r')			#Get starting info message from file and use it in dialog box.
 introText = introduction.read()
 introduction.close()
 information(introText)
 firstSteps.mainloop()						#Start the demo. :)
 
-os.system("python ./fractaldemo2.py")
+os.system("python ./fractaldemo3.py")

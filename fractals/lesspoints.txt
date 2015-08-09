@@ -1,0 +1,1 @@
+Now our poor little rasperry pi is having a much easier time. It only has to compute 1,000 steps along the "random path." Go ahead and pick a starting point and it will get started with the computations.
