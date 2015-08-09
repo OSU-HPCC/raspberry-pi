@@ -1,3 +1,4 @@
+#include<mpi.h>
 #include<iostream>
 #include<fstream>
 #include<cstdlib>
@@ -75,6 +76,12 @@ int main(int argc, char *argv[]){
   p3.x = getMyNum(thirdx); p3.y = getMyNum(thirdy);
   seed.x = getMyNum(origx); seed.y = getMyNum(origy);
 
+  
+  int n_proc, rank;
+  MPI_Init( &argc, &argv );		//Set up MPI
+  MPI_Comm_size( MPI_COMM_WORLD, &n_proc );
+  MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+
   srand(time(NULL));			//Seed random variable.
   int dice;				//Variable for random numbers.
   point pos = seed;			//First step of iteration.
@@ -111,7 +118,7 @@ int main(int argc, char *argv[]){
   ofstream plotFile;
   plotFile.open("fractalpoints.txt");
   for(int j = 0; j < iterations; j++){
-    plotFile << plot[j].x << " " << plot[j].y << "\n";
+    plotFile << plot[j].x << " " << plot[j].y << " " << rank << "\n";
   }
   plotFile.close();
 
@@ -120,6 +127,8 @@ int main(int argc, char *argv[]){
     cout << "(" << plot[j].x << ", " << plot[j].y << ")\n";
 }
 */
+
+  MPI_Finalize();
 
   return 0;
 

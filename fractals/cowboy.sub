@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -V
+#PBS -q batch
+#PBS -l nodes=1:ppn=1,walltime=5000
+#PBS -j oe
+#PBS -o compile.out
+#PBS -m abe -M doehle@okstate.edu
+
+cd $PBS_O_WORKDIR/
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#Place script for compiling/installing software package here: #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+
+
+
+
+
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                                                             #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
