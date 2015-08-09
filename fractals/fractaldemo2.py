@@ -101,4 +101,4 @@ introduction.close()
 information(introText)
 firstSteps.mainloop()						#Start the demo. :)
 
-os.system("./fractaldemo3.py")
+os.system("python ./fractaldemo3.py")
