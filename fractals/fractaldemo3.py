@@ -26,7 +26,7 @@ canvas_height = 500
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
-auto_num_pts = "1000"			#Number of iteration when computer takes over doing random walk.
+auto_num_pts = "1250"			#Number of iteration when computer takes over doing random walk.
 
 #*******************************
 #Some function definitions
@@ -38,8 +38,8 @@ def information(text):					#Function for showing dialog boxes.
     demo_step += 1
 
 
-def runEngine(bashCommand):				#Function runs back end gives back results
-    os.system(bashCommand)
+def runParallelEngine(bashCommand):				#Function runs back end gives back results
+    os.system("mpirun -n 8 python ./distribute.py " + bashCommand)
     pointFile = open('fractalpoints.txt', 'r')
     plotme = pointFile.read()				#Read text from file and clean up for next time.
     pointFile.close()
@@ -69,7 +69,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
         computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0"
-        enginePoints = runEngine(computerRun)
+        enginePoints = runParallelEngine(computerRun)
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
             plotaPoint(enginePoints[k])
         secondInfo = open('almostdone.txt', 'r')		#Get message about how supercomputers work.
