@@ -68,7 +68,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         last_point[0] = event.x
         last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
-        computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0"
+        computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0" + " -r " + "1"
         enginePoints = runEngine(computerRun)
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
             plotaPoint(enginePoints[k])

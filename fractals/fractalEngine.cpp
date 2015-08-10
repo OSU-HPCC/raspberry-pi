@@ -11,8 +11,9 @@ int main(int argc, char *argv[]){
   char *firstx, *firsty, *secondx, *secondy, *thirdx, *thirdy, *origx, *origy;
   char *specIter;
   char *pointIndicator;
+  char *pirandomseed;
 
-  if(argc != 21){			//Check for the right number of arguments.
+  if(argc != 23){			//Check for the right number of arguments.
     cout << "Incorrect number of arguments.\n";
     return 1;
   }
@@ -58,6 +59,10 @@ int main(int argc, char *argv[]){
         pointIndicator = argv[i+1];
         i++;
       }
+      else if(std::string(argv[i]) == "-r"){		//Random num generator seed.
+        pirandomseed = argv[i+1];
+        i++;
+      }
       else{
         cout << "Invalid arguments.\n";
         return 1;
@@ -68,6 +73,7 @@ int main(int argc, char *argv[]){
   point p1, p2, p3, seed;
   int iterations = (int)getMyNum(specIter);
   int movetoPoint = (int)getMyNum(pointIndicator);
+  int spirandomseed = (int)getMyNum(pirandomseed);
   point plot[iterations];
 
   p1.x = getMyNum(firstx); p1.y = getMyNum(firsty);
@@ -75,7 +81,7 @@ int main(int argc, char *argv[]){
   p3.x = getMyNum(thirdx); p3.y = getMyNum(thirdy);
   seed.x = getMyNum(origx); seed.y = getMyNum(origy);
 
-  srand(time(NULL));			//Seed random variable.
+  srand(time(NULL)*spirandomseed);	//Seed random variable.
   int dice;				//Variable for random numbers.
   point pos = seed;			//First step of iteration.
 

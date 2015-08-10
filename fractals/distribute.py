@@ -21,6 +21,7 @@ else:
 
 commandtext = MPI.COMM_WORLD.bcast(commandtext, root=0)
 
+commandtext = commandtext + str(rank)
 os.system(commandtext)
 
 
