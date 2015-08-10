@@ -124,4 +124,4 @@ introduction.close()
 information(introText)
 firstSteps.mainloop()						#Start the demo. :)
 
-os.system("python ./fractaldemo4.py")
+os.system("echo '\n\n~~~~~~~~~~~~Thanks so much! We hope you enjoyed!~~~~~~~~~~~~\n\n'")
