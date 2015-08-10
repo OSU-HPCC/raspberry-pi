@@ -21,8 +21,8 @@ firstSteps.attributes("-fullscreen", True)
 #*******************************
 demo_step = -1 
 point_size = 5				#Size of points being plotted.
-canvas_width = 500			#Width and height for plotting fractals.
-canvas_height = 500			
+canvas_width = firstSteps.winfo_screenwidth()			#Width and height for plotting fractals.
+canvas_height = firstSteps.winfo_screenheight()
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
@@ -76,6 +76,7 @@ def plplotaPoint(plotme):					#Plots a single point
         paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="purple", width=2)
     last_point[0] = plotme[0]
     last_point[1] = plotme[1]				#Update record of last point plotted.
+    firstSteps.update_idletasks()
 
 def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global triangle_points
@@ -87,6 +88,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         paper.create_oval(event.x - point_size, event.y + point_size, event.x + point_size, event.y - point_size, outline="black", fill="orange", width=2)
         last_point[0] = event.x
         last_point[1] = event.y
+        firstSteps.update_idletasks()
         demo_step += 1			#Move to next step of demo.
         computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0" + " -r "
         enginePoints = runParallelEngine(computerRun)
@@ -95,6 +97,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         secondInfo = open('almostdone.txt', 'r')		#Get message about how supercomputers work.
         secondInfotext = secondInfo.read()
         secondInfo.close()
+        time.sleep(5)
         information(secondInfotext)
     elif demo_step == 1:
         firstSteps.quit()
