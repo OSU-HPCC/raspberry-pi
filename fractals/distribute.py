@@ -21,9 +21,6 @@ else:
 
 commandtext = MPI.COMM_WORLD.bcast(commandtext, root=0)
 
-if rank != 0:	#If they go at same time, everybody picks the same "random path."
-    time.sleep(rank/4)
-
 os.system(commandtext)
 
 

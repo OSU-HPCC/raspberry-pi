@@ -43,11 +43,13 @@ def runParallelEngine(bashCommand):				#Function runs back end gives back result
     passOutCommand.write(bashCommand)
     passOutCommand.close()
     os.system("mpirun -np 7 --machinefile ~/slicesofpie python /home/pi/raspberry-pi/fractals/distribute.py")
+    os.system("rm /home/pi/raspberry-pi/fractals/parallelthis.txt")
     pointFile = open('fractalpoints.txt', 'r')
     plotme = pointFile.read()				#Read text from file and clean up for next time.
     pointFile.close()
     os.system("rm ./fractalpoints.txt")
     plotme = plotme.split('\n')				#Format data into something nice to work with.
+    plotme = plotme[:-1]
     for i in range(len(plotme)):
         plotme[i] = plotme[i].split(' ')
         plotme[i][0] = float(plotme[i][0])
