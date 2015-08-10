@@ -1,1 +1,0 @@
-/home/pi/raspberry-pi/fractals/fractalengine -fx 5 -fy 250 -sx 5 -sy 500 -tx 500 -ty 500 -ox 250 -oy 500 -i 2 -p 0
