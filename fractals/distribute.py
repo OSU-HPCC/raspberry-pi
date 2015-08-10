@@ -6,6 +6,7 @@ Parallel Engine Wrapper
 from mpi4py import MPI
 import sys
 import os
+import time
 
 size = MPI.COMM_WORLD.Get_size()
 rank = MPI.COMM_WORLD.Get_rank()
@@ -19,6 +20,9 @@ else:
     commandtext = None
 
 commandtext = MPI.COMM_WORLD.bcast(commandtext, root=0)
+
+if rank != 0:	#If they go at same time, everybody picks the same "random path."
+    time.sleep(rank/4)
 
 os.system(commandtext)
 
@@ -42,7 +46,9 @@ for i in range(len(mypoints)):
 #Pass all the data back to Pecan who writes it out into file.
 
 if rank == 0:
-    masterCopy = mypoints
+    masterCopy = [ [ [ 0, 0, 0 ], [ 0, 0, 0 ] ] ]
+    masterCopy.append(mypoints)
+    masterCopy = masterCopy[1:]
 
 for j in range(1, size):
     if rank == j:
@@ -54,13 +60,14 @@ for j in range(1, size):
 #Pecan writes it all out to a file...the end.
 
 if rank == 0:
+    step = len(mypoints)
     pointFile = open('fractalpoints.txt', 'w')
     for x in range(len(mypoints)):
         for y in range(size):
-            pointFile.write(masterCopy[x+(y*x)][0])
+            pointFile.write(str(masterCopy[y][x][0]))
             pointFile.write(" ")
-            pointFile.write(masterCopy[y][x][1])
+            pointFile.write(str(masterCopy[y][x][1]))
             pointFile.write(" ")
-            pointFile.write(masterCopy[y][x][2])
+            pointFile.write(str(masterCopy[y][x][2]))
             pointFile.write("\n")
     pointFile.close()

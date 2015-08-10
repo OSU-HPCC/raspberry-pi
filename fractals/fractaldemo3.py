@@ -39,21 +39,39 @@ def information(text):					#Function for showing dialog boxes.
 
 
 def runParallelEngine(bashCommand):				#Function runs back end gives back results
-    os.system("mpirun -n 8 python ./distribute.py " + bashCommand)
+    passOutCommand = open('/home/pi/raspberry-pi/fractals/parallelthis.txt', 'w')
+    passOutCommand.write(bashCommand)
+    passOutCommand.close()
+    os.system("mpirun -np 7 --machinefile ~/slicesofpie python /home/pi/raspberry-pi/fractals/distribute.py")
     pointFile = open('fractalpoints.txt', 'r')
     plotme = pointFile.read()				#Read text from file and clean up for next time.
     pointFile.close()
     os.system("rm ./fractalpoints.txt")
     plotme = plotme.split('\n')				#Format data into something nice to work with.
-    plotme = plotme[:-1]
     for i in range(len(plotme)):
         plotme[i] = plotme[i].split(' ')
         plotme[i][0] = float(plotme[i][0])
         plotme[i][1] = float(plotme[i][1])
+        plotme[i][2] = int(plotme[i][2])
     return plotme
 
-def plotaPoint(plotme):					#Plots a single point
-    paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=2)
+def plplotaPoint(plotme):					#Plots a single point
+    if plotme[2] == 0:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=2)
+    if plotme[2] == 1:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="black", width=2)
+    if plotme[2] == 2:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="blue", width=2)
+    if plotme[2] == 3:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="yellow", width=2)
+    if plotme[2] == 4:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="red", width=2)
+    if plotme[2] == 5:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="green", width=2)
+    if plotme[2] == 6:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="white", width=2)
+    if plotme[2] == 7:
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="purple", width=2)
     last_point[0] = plotme[0]
     last_point[1] = plotme[1]				#Update record of last point plotted.
 
@@ -71,7 +89,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         computerRun = "./fractalengine -fx " + str(triangle_points[0]) + " -fy " + str(triangle_points[1]) + " -sx " + str(triangle_points[2]) + " -sy " + str(triangle_points[3]) + " -tx " + str(triangle_points[4]) + " -ty " + str(triangle_points[5]) + " -ox " + str(last_point[0]) + " -oy " + str(last_point[1]) + " -i " + auto_num_pts + " -p " + "0"
         enginePoints = runParallelEngine(computerRun)
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
-            plotaPoint(enginePoints[k])
+            plplotaPoint(enginePoints[k])
         secondInfo = open('almostdone.txt', 'r')		#Get message about how supercomputers work.
         secondInfotext = secondInfo.read()
         secondInfo.close()
