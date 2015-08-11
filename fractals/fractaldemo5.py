@@ -108,6 +108,9 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         time.sleep(5)
     elif demo_step == 1:
         firstSteps.quit()
+        if email != 'None':
+            os.system("echo 'Thank you so much for checking out our demonstration on high performance computing! The fractal you made is attached to this email. If you want to know more about high performance computing, check out the info. on our website:\nhttps://hpcc.okstate.edu/content/hpc-education-resources\n\nWe hope you enjoy it!\n\nSincerely,\n\nOkstate HPCC Team' | mailx -s Your Fractal -a myfractal.jpeg -t" + email)
+        os.system("rm ./myfractal.jpeg")
         os.system("echo '\n\n~~~~~~~~~~~~Thanks so much! We hope you enjoyed!~~~~~~~~~~~~\n\n'")
 
 #*********************************************
