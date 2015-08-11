@@ -26,7 +26,17 @@ canvas_height = firstSteps.winfo_screenheight()
 click_counter = 0			#Count the number of screen touches/mouse clicks.
 last_point = [0, 0]			#Last point plotted on fractal.
 triangle_points = [canvas_width*0.5, canvas_height*0.05, canvas_width*0.05, canvas_height*0.95, canvas_width*0.95, canvas_height*0.95]
-auto_num_pts = "1250"			#Number of iteration when computer takes over doing random walk.
+
+#**********************
+#Read in student's email info.
+#**********************
+studentEmail = open('studentemail.txt', 'r')
+email = studentEmail.read()
+studentEmail.close()
+os.system("rm ./studentemail.txt")
+email = email.split('\n')
+auto_num_pts = email[1]				#Number of iteration when computer takes over doing random walk.
+email = email[0]
 
 #*******************************
 #Some function definitions
@@ -94,14 +104,11 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         enginePoints = runParallelEngine(computerRun)
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
             plplotaPoint(enginePoints[k])
-        secondInfo = open('almostdone.txt', 'r')		#Get message about how supercomputers work.
-        secondInfotext = secondInfo.read()
-        secondInfo.close()
+        os.system("scrot /home/pi/raspberry-pi/fractals/myfractal.jpeg")
         time.sleep(5)
-        information(secondInfotext)
     elif demo_step == 1:
         firstSteps.quit()
-
+        os.system("echo '\n\n~~~~~~~~~~~~Thanks so much! We hope you enjoyed!~~~~~~~~~~~~\n\n'")
 
 #*********************************************
 #Stuff in window for steps 0 and 1 of tutorial
@@ -118,10 +125,9 @@ paper.create_oval(triangle_points[0] - point_size*2, triangle_points[1] + point_
 paper.create_oval(triangle_points[2] - point_size*2, triangle_points[3] + point_size*2, triangle_points[2] + point_size*2, triangle_points[3] - point_size*2, outline="black", fill="black", width=2)
 paper.create_oval(triangle_points[4] - point_size*2, triangle_points[5] + point_size*2, triangle_points[4] + point_size*2, triangle_points[5] - point_size*2, outline="black", fill="black", width=2)
 
-introduction = open('teamwork.txt', 'r')			#Get starting info message from file and use it in dialog box.
+introduction = open('lastremark.txt', 'r')			#Get starting info message from file and use it in dialog box.
 introText = introduction.read()
 introduction.close()
 information(introText)
 firstSteps.mainloop()						#Start the demo. :)
 
-os.system("echo '\n\n~~~~~~~~~~~~Thanks so much! We hope you enjoyed!~~~~~~~~~~~~\n\n'")
