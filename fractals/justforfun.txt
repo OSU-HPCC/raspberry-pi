@@ -1,1 +1,1 @@
-Cool, now lets do one just for fun. You pick how many steps you want each raspberry pi to take.
+Cool, now lets do one just for fun. Pick how many steps you want each raspberry pi to take by moving the slider.

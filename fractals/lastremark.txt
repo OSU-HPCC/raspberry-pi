@@ -1,1 +1,1 @@
-You know the drill. Pick a starting point. Only this time, each pi will take the number of steps that you picked with the slide bar.
+You know the drill. Pick a starting point. Only this time, each pi will take the number of steps that you picked with the slide bar. When you are finished looking at your fractal, just touch anywhere on the screen.
