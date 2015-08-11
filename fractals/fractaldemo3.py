@@ -99,8 +99,9 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         secondInfo.close()
         time.sleep(5)
         information(secondInfotext)
-    elif demo_step == 1:
+    elif demo_step != 0:
         firstSteps.quit()
+        os.system("echo '\n' ")
 
 
 #*********************************************
@@ -123,5 +124,4 @@ introText = introduction.read()
 introduction.close()
 information(introText)
 firstSteps.mainloop()						#Start the demo. :)
-
 os.system("python ./fractaldemo4.py")

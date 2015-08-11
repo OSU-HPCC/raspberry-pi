@@ -59,7 +59,7 @@ cb = Checkbutton(myFractal, text="Email me a picture of my fractal when it's don
 cb.pack(pady=((height/8),0))
 cb.bind('<Button-1>', checkCheck)
 
-sl = Scale(myFractal, from_=1, to=10000, orient=HORIZONTAL, length=(length - 10))	#Scroll bar.
+sl = Scale(myFractal, from_=1, to=1500, orient=HORIZONTAL, length=(length - 10))	#Scroll bar.
 sl.pack(padx=(50, 50), pady=((height/6), 50))
 
 email = StringVar()									#Textbox for inputing email.
