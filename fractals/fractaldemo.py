@@ -20,7 +20,7 @@ firstSteps.attributes("-fullscreen", True)
 #by everybody.
 #*******************************
 demo_step = -1 
-point_size = 5				#Size of points being plotted.
+point_size = 2				#Size of points being plotted.
 canvas_width = firstSteps.winfo_screenwidth()		#Width and height for plotting fractals.
 canvas_height = firstSteps.winfo_screenheight()			
 click_counter = 0			#Count the number of screen touches/mouse clicks.
@@ -33,7 +33,6 @@ auto_num_pts = "10000"			#Number of iteration when computer takes over doing ran
 #*******************************
 def information(text):					#Function for showing dialog boxes.
     global demo_step
-
     showinfo("Fractals", text)
     demo_step += 1
 
@@ -53,7 +52,7 @@ def runEngine(bashCommand):				#Function runs back end gives back results
     return plotme
 
 def plotaPoint(plotme):					#Plots a single point
-    paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=2)
+    paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=1)
     last_point[0] = plotme[0]
     last_point[1] = plotme[1]				#Update record of last point plotted.
     firstSteps.update_idletasks()
@@ -65,14 +64,14 @@ def whichPoint(event, triangle_points):			#Function that plots a point when the 
     point2 = False
     point3 = False
 
-    if (event.x < triangle_points[0] + point_size*2)  and (event.x > triangle_points[0] - point_size*2): #Test if point1 was clicked on
-        if (event.y < triangle_points[1] + point_size*2) and (event.y > triangle_points[1] - point_size*2):
+    if (event.x < triangle_points[0] + point_size*20)  and (event.x > triangle_points[0] - point_size*20): #Test if point1 was clicked on
+        if (event.y < triangle_points[1] + point_size*20) and (event.y > triangle_points[1] - point_size*20):
             point1 = True
-    if (event.x < triangle_points[2] + point_size*2)  and (event.x > triangle_points[2] - point_size*2): #Test if point2 was clicked on
-        if (event.y < triangle_points[3] + point_size*2) and (event.y > triangle_points[3] - point_size*2):
+    if (event.x < triangle_points[2] + point_size*20)  and (event.x > triangle_points[2] - point_size*20): #Test if point2 was clicked on
+        if (event.y < triangle_points[3] + point_size*20) and (event.y > triangle_points[3] - point_size*20):
             point2 = True
-    if (event.x < triangle_points[4] + point_size*2)  and (event.x > triangle_points[4] - point_size*2): #Test if point3 was clicked on
-        if (event.y < triangle_points[5] + point_size*2) and (event.y > triangle_points[5] - point_size*2):
+    if (event.x < triangle_points[4] + point_size*20)  and (event.x > triangle_points[4] - point_size*20): #Test if point3 was clicked on
+        if (event.y < triangle_points[5] + point_size*20) and (event.y > triangle_points[5] - point_size*20):
             point3 = True
 
     if point1 == True:					#Calculate the next step base on the previous point plotted.
@@ -116,7 +115,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global auto_num_pts
 
     if demo_step == 0:			#Pick fractal 'seed'
-        paper.create_oval(event.x - point_size, event.y + point_size, event.x + point_size, event.y - point_size, outline="black", fill="orange", width=2)
+        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=1)
         last_point[0] = event.x
         last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
@@ -141,7 +140,9 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         thirdInfotext = thirdInfo.read()
         thirdInfo.close()
         time.sleep(5)
-        information(thirdInfotext)
+        messagelb2 = paper.create_text(canvas_width - 50, 50, anchor="ne")
+        paper.itemconfig(messagelb2, text=thirdInfotext, font='Verdana')
+        paper.insert(messagelb2, 20, "")
     elif demo_step > 2:
         firstSteps.quit()
 
@@ -157,14 +158,15 @@ paper.pack()											#input from clicks.
 #********************************
 #Draw the points of the triangle.
 #********************************
-paper.create_oval(triangle_points[0] - point_size*2, triangle_points[1] + point_size*2, triangle_points[0] + point_size*2, triangle_points[1] - point_size*2, outline="black", fill="black", width=2)
-paper.create_oval(triangle_points[2] - point_size*2, triangle_points[3] + point_size*2, triangle_points[2] + point_size*2, triangle_points[3] - point_size*2, outline="black", fill="black", width=2)
-paper.create_oval(triangle_points[4] - point_size*2, triangle_points[5] + point_size*2, triangle_points[4] + point_size*2, triangle_points[5] - point_size*2, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[0] - point_size*16, triangle_points[1] + point_size*16, triangle_points[0] + point_size*16, triangle_points[1] - point_size*16, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[2] - point_size*16, triangle_points[3] + point_size*16, triangle_points[2] + point_size*16, triangle_points[3] - point_size*16, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[4] - point_size*16, triangle_points[5] + point_size*16, triangle_points[4] + point_size*16, triangle_points[5] - point_size*16, outline="black", fill="black", width=2)
 
 introduction = open('introduction.txt', 'r')			#Get starting info message from file and use it in dialog box.
 introText = introduction.read()
 introduction.close()
-information(introText)
+messagelb = paper.create_text(50, 50, anchor="nw")
+paper.itemconfig(messagelb, text=introText, font='Verdana')
+paper.insert(messagelb, 20, "")
 firstSteps.mainloop()						#Start the demo. :)
-
 os.system("python ./fractaldemo2.py")

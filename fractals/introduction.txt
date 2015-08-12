@@ -1,3 +1,10 @@
-Hi, and welcome to our raspberry pi supercomputer! This is a little supercomputer compared to most, but it has been built in the same way as real supercomputers that scientists use in research every day. As you can see, it's actually eight raspberry pi computers networked together so that they can all work together on one problem that would ordinarily be too big for any one raspberry pi computer to work on by itself.
-
-We're going to see how this works by looking at fractals. On the next screen you will see the three dots of a triangle. We're going to take a "random walk" through the triangle. First, touch anywhere on the screen in order to pick a starting point. Then pick any one of the three dots from the triangle. The next point will always be halfway between the last point and the triangle dot that you pick. Ready to get started? Press OK.
+Hi, and welcome to our raspberry pi supercomputer!
+As you can see, there are three dots forming a 
+triangle. We're going to take a "random walk"
+ through the triangle. First, touch anywhere on 
+the screen in order to pick a starting point.
+Then touch any one of the three dots from 
+the triangle. The next point will always be halfway 
+between the last point and the triangle dot that 
+you pick. Try randomly picking as many triangle
+dots as you can.

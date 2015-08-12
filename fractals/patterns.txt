@@ -1,1 +1,1 @@
-Are you tired yet? That was ten steps. What do you think will happen if we do 100 steps, or even 1,000? Will the dots fill the triangle randomly or will there be a pattern? Don't worry, we're going to let the computer do the hard work. It's going to randomly pick triangle dots for the next 10,000 steps.
+Are you tired yet? That was ten steps. We'll let the computer do the next 10,000 steps.
