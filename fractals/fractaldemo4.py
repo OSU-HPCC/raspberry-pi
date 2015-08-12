@@ -37,7 +37,7 @@ someText.close()
 lb = Label(myFractal, text=info, justify=CENTER, font="Verdana 20")
 lb.pack(pady=((height/8), 0))
 
-sl = Scale(myFractal, from_=1, to=1500, orient=HORIZONTAL, length=(length - 10))	#Scroll bar.
+sl = Scale(myFractal, from_=1, to=3000, orient=HORIZONTAL, length=(length - 10))	#Scroll bar.
 sl.pack(padx=(50, 50), pady=((height/6), 50))
 
 bt = Button(myFractal, text="Make Fractal", command=acceptInfo, font="Verdana 20")

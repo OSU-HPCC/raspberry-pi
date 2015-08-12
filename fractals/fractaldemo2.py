@@ -65,7 +65,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global auto_num_pts
 
     if demo_step == 0:			#Pick fractal 'seed'
-        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=1)
+        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=2)
         last_point[0] = event.x
         last_point[1] = event.y
         firstSteps.update_idletasks()
