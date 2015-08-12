@@ -23,30 +23,13 @@ checkYesNo = IntVar()
 
 def acceptInfo():
     emailInfo = open('studentemail.txt', 'w')
-    if checkYesNo.get() != 0:
-        emailInfo.write(email.get())
-        emailInfo.write("\n")
-    elif checkYesNo.get() == 0:
-        emailInfo.write("None\n")
+    emailInfo.write("None\n")
     emailInfo.write(str(sl.get()))
     emailInfo.close()
     myFractal.quit()
     
 
-def checkCheck(event):							#Check box activates texbox for email entry.
-    global canDelete
-
-    if (checkYesNo.get() == 0) and canDelete == True:
-        tx.config(state=NORMAL)
-        email.set("")
-        canDelete = False
-    elif checkYesNo.get() != 0:
-        tx.config(state=DISABLED)
-        email.set("youremail@example.com")
-        canDelete = True
-
 #This window has a slider and presents student with options for number of steps they want each pi to take.
-#Also gives them an option to input their email so they can email themselves a picture of their fractal.
 
 someText = open('justforfun.txt', 'r')							#Info. text
 info = someText.read()
@@ -54,18 +37,8 @@ someText.close()
 lb = Label(myFractal, text=info, justify=CENTER, font="Verdana 20")
 lb.pack(pady=((height/8), 0))
 
-#Check box.
-cb = Checkbutton(myFractal, text="Email me a picture of my fractal when it's done.", font="Verdana 15", variable=checkYesNo)
-cb.pack(pady=((height/8),0))
-cb.bind('<Button-1>', checkCheck)
-
 sl = Scale(myFractal, from_=1, to=1500, orient=HORIZONTAL, length=(length - 10))	#Scroll bar.
 sl.pack(padx=(50, 50), pady=((height/6), 50))
-
-email = StringVar()									#Textbox for inputing email.
-tx = Entry(myFractal, width=75, font="Verdana 15", textvariable=email, state=DISABLED)
-tx.pack(pady=((height/8)))
-email.set("youremail@example.com")
 
 bt = Button(myFractal, text="Make Fractal", command=acceptInfo, font="Verdana 20")
 bt.pack(side=BOTTOM)
