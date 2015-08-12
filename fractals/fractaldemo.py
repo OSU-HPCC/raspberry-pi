@@ -115,7 +115,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global auto_num_pts
 
     if demo_step == 0:			#Pick fractal 'seed'
-        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=2)
+        paper.create_oval(event.x - point_size*4, event.y + point_size*4, event.x + point_size*4, event.y - point_size*4, outline="black", fill="orange", width=2)
         last_point[0] = event.x
         last_point[1] = event.y
         demo_step += 1			#Move to next step of demo.
@@ -139,7 +139,6 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         thirdInfo = open('results.txt', 'r')
         thirdInfotext = thirdInfo.read()
         thirdInfo.close()
-        time.sleep(5)
         messagelb2 = paper.create_text(canvas_width - 50, 50, anchor="ne")
         paper.itemconfig(messagelb2, text=thirdInfotext, font='Verdana')
         paper.insert(messagelb2, 20, "")

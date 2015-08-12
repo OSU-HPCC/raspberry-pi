@@ -14,11 +14,11 @@ while response == 'y':
     if response == 'Y':
         os.system("python ./fractaldemo.py")
         response = 'n'
-        print 'To go again type: python STARTHERE.py'
+        print 'To go again type: python STARTHERE.py\n\n'
     elif response == 'y':
         os.system("python ./fractaldemo.py")
         response = 'n'
-        print 'To go again type: python STARTHERE.py'
+        print 'To go again type: python STARTHERE.py\n\n'
     elif response == 'N':
         print "\n\nThanks so much! Have a good day!\n\n"
     elif response == 'n':

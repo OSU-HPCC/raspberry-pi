@@ -95,7 +95,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global auto_num_pts
 
     if demo_step == 0:			#Pick fractal 'seed'
-        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=2)
+        paper.create_oval(event.x - point_size*4, event.y + point_size*4, event.x + point_size*4, event.y - point_size*4, outline="black", fill="orange", width=2)
         last_point[0] = event.x
         last_point[1] = event.y
         firstSteps.update_idletasks()
@@ -105,7 +105,6 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         for k in range(len(enginePoints)):			#Let the computer plot a bunch of points so the fractal pattern emmerges.
             plplotaPoint(enginePoints[k])
         os.system("scrot /home/pi/raspberry-pi/fractals/myfractal.jpeg")
-        time.sleep(1)
         messagelb2 = paper.create_text(canvas_width - 50, 50, anchor="ne")
         paper.itemconfig(messagelb2, text="Touch anywhere to finish.", font='Verdana 20')
         paper.insert(messagelb2, 20, "")
