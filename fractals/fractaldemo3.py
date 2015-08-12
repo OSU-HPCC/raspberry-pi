@@ -20,7 +20,7 @@ firstSteps.attributes("-fullscreen", True)
 #by everybody.
 #*******************************
 demo_step = -1 
-point_size = 5				#Size of points being plotted.
+point_size = 2				#Size of points being plotted.
 canvas_width = firstSteps.winfo_screenwidth()			#Width and height for plotting fractals.
 canvas_height = firstSteps.winfo_screenheight()
 click_counter = 0			#Count the number of screen touches/mouse clicks.
@@ -59,21 +59,21 @@ def runParallelEngine(bashCommand):				#Function runs back end gives back result
 
 def plplotaPoint(plotme):					#Plots a single point
     if plotme[2] == 0:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="orange", width=1)
     if plotme[2] == 1:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="black", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="black", width=1)
     if plotme[2] == 2:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="blue", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="blue", width=1)
     if plotme[2] == 3:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="yellow", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="yellow", width=1)
     if plotme[2] == 4:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="red", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="red", width=1)
     if plotme[2] == 5:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="green", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="green", width=1)
     if plotme[2] == 6:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="white", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="white", width=1)
     if plotme[2] == 7:
-        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="purple", width=2)
+        paper.create_oval(plotme[0] - point_size, plotme[1] + point_size, plotme[0] + point_size, plotme[1] - point_size, outline="black", fill="purple", width=1)
     last_point[0] = plotme[0]
     last_point[1] = plotme[1]				#Update record of last point plotted.
     firstSteps.update_idletasks()
@@ -85,7 +85,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
     global auto_num_pts
 
     if demo_step == 0:			#Pick fractal 'seed'
-        paper.create_oval(event.x - point_size, event.y + point_size, event.x + point_size, event.y - point_size, outline="black", fill="orange", width=2)
+        paper.create_oval(event.x - point_size*2, event.y + point_size*2, event.x + point_size*2, event.y - point_size*2, outline="black", fill="orange", width=1)
         last_point[0] = event.x
         last_point[1] = event.y
         firstSteps.update_idletasks()
@@ -97,8 +97,10 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         secondInfo = open('almostdone.txt', 'r')		#Get message about how supercomputers work.
         secondInfotext = secondInfo.read()
         secondInfo.close()
-        time.sleep(5)
-        information(secondInfotext)
+        time.sleep(3)
+        messagelb2 = paper.create_text(canvas_width - 50, 50, anchor="ne")
+        paper.itemconfig(messagelb2, text=secondInfotext, font='Verdana 20')
+        paper.insert(messagelb2, 20, "")
     elif demo_step != 0:
         firstSteps.quit()
         os.system("echo '\n' ")
@@ -115,13 +117,16 @@ paper.pack()											#input from clicks.
 #********************************
 #Draw the points of the triangle.
 #********************************
-paper.create_oval(triangle_points[0] - point_size*2, triangle_points[1] + point_size*2, triangle_points[0] + point_size*2, triangle_points[1] - point_size*2, outline="black", fill="black", width=2)
-paper.create_oval(triangle_points[2] - point_size*2, triangle_points[3] + point_size*2, triangle_points[2] + point_size*2, triangle_points[3] - point_size*2, outline="black", fill="black", width=2)
-paper.create_oval(triangle_points[4] - point_size*2, triangle_points[5] + point_size*2, triangle_points[4] + point_size*2, triangle_points[5] - point_size*2, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[0] - point_size*16, triangle_points[1] + point_size*16, triangle_points[0] + point_size*16, triangle_points[1] - point_size*16, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[2] - point_size*16, triangle_points[3] + point_size*16, triangle_points[2] + point_size*16, triangle_points[3] - point_size*16, outline="black", fill="black", width=2)
+paper.create_oval(triangle_points[4] - point_size*16, triangle_points[5] + point_size*16, triangle_points[4] + point_size*16, triangle_points[5] - point_size*16, outline="black", fill="black", width=2)
 
 introduction = open('teamwork.txt', 'r')			#Get starting info message from file and use it in dialog box.
 introText = introduction.read()
 introduction.close()
-information(introText)
+messagelb = paper.create_text(50, 50, anchor="nw")
+paper.itemconfig(messagelb, text=introText, font='Verdana 20')
+paper.insert(messagelb, 20, "")
+demo_step += 1
 firstSteps.mainloop()						#Start the demo. :)
 os.system("python ./fractaldemo4.py")

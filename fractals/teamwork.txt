@@ -1,1 +1,5 @@
-Just like before, feel free to pick a starting point. Each pi will take it's own "random walk" from your starting point. Each pi will have its own color for its points.
+Pick a starting point.
+This time, each pi will 
+take it's own "random walk" 
+from your starting point.
+Each pi will have its own color.
