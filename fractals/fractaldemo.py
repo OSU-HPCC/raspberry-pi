@@ -140,7 +140,7 @@ def plotPoint(event):			#Function for plotting point when mouse is clicked.
         thirdInfotext = thirdInfo.read()
         thirdInfo.close()
         messagelb2 = paper.create_text(canvas_width - 50, 50, anchor="ne")
-        paper.itemconfig(messagelb2, text=thirdInfotext, font='Verdana')
+        paper.itemconfig(messagelb2, text=thirdInfotext, font='Verdana 15')
         paper.insert(messagelb2, 20, "")
     elif demo_step > 2:
         firstSteps.quit()
@@ -165,7 +165,7 @@ introduction = open('introduction.txt', 'r')			#Get starting info message from f
 introText = introduction.read()
 introduction.close()
 messagelb = paper.create_text(50, 50, anchor="nw")
-paper.itemconfig(messagelb, text=introText, font='Verdana')
+paper.itemconfig(messagelb, text=introText, font='Verdana 15')
 paper.insert(messagelb, 20, "")
 demo_step += 1
 firstSteps.mainloop()						#Start the demo. :)
